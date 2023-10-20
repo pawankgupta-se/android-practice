@@ -1,0 +1,63 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+}
+
+android {
+    namespace 'com.gowittgroup.mvitemplate'
+    compileSdk buildConfig.compileSdk
+
+    defaultConfig {
+        applicationId "com.gowittgroup.mvitemplate"
+        minSdk buildConfig.minSdk
+        targetSdk buildConfig.targetSdk
+        versionCode buildConfig.version.code
+        versionName buildConfig.version.name
+
+        buildConfigField "String", "API_BASE_URL", "\"https://rickandmortyapi.com/api\""
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+
+    implementation deps.androidx.core_ktx
+    implementation deps.androidx.appcompat
+    implementation deps.material_component
+    implementation deps.androidx.constraintlayout
+    implementation deps.navigation.fragment_ktx
+    implementation deps.navigation.ui_ktx
+    implementation deps.androidx.recyclerview
+    implementation deps.coil
+
+    implementation deps.dagger.common
+    kapt deps.dagger.compiler
+
+    implementation project(path: ':data')
+    implementation project(path: ':wrapper')
+    implementation project(path: ':commonui')
+    implementation project(path: ':core')
+
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+}

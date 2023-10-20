@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">HiltSample</string>
+    <string name="error">There is issue with fetching data from server.</string>
+</resources>
